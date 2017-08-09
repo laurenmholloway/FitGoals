@@ -1,63 +1,28 @@
 ﻿@model IEnumerable<FitGoals.Models.Goal>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "fitGoals | Dashboard";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalQuantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalDeadline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserAssociation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GoalType.GoalName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Measurement.MeasurementName)
-        </th>
-        <th></th>
-    </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
+   
             @Html.DisplayFor(modelItem => item.GoalName)
-        </td>
-        <td>
+       
             @Html.DisplayFor(modelItem => item.GoalQuantity)
-        </td>
-        <td>
+       
             @Html.DisplayFor(modelItem => item.GoalDeadline)
-        </td>
-        <td>
+       
             @Html.DisplayFor(modelItem => item.UserAssociation)
-        </td>
-        <td>
+       
             @Html.DisplayFor(modelItem => item.GoalType.GoalName)
-        </td>
-        <td>
+       
             @Html.DisplayFor(modelItem => item.Measurement.MeasurementName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GoalID }) |
+      
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.GoalID }) |
             @Html.ActionLink("Details", "Details", new { id=item.GoalID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GoalID })
-        </td>
-    </tr>
+            @Html.ActionLink("Delete", "Delete", new { id=item.GoalID })*@
+        
 }
 
-</table>
+
