@@ -1,0 +1,72 @@
+﻿@model FitGoals.Models.Goal
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Goal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalQuantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalQuantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalDeadline)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserAssociation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserAssociation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalType.GoalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalType.GoalName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Measurement.MeasurementName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Measurement.MeasurementName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

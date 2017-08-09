@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FitGoalsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="GoalID" />
+          </Key>
+          <Property Name="GoalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoalName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GoalTypeID" Type="int" Nullable="false" />
+          <Property Name="GoalQuantity" Type="int" Nullable="false" />
+          <Property Name="MeasurementID" Type="int" Nullable="false" />
+          <Property Name="GoalDeadline" Type="date" Nullable="false" />
+          <Property Name="UserAssociation" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GoalType">
+          <Key>
+            <PropertyRef Name="GoalTypeID" />
+          </Key>
+          <Property Name="GoalTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoalName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Measurement">
+          <Key>
+            <PropertyRef Name="MeasurementID" />
+          </Key>
+          <Property Name="MeasurementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeasurementName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Goal_GoalType1">
+          <End Role="GoalType" Type="Self.GoalType" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoalType">
+              <PropertyRef Name="GoalTypeID" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="GoalTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Measurement">
+          <End Role="Measurement" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurement">
+              <PropertyRef Name="MeasurementID" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="MeasurementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitGoalsModelStoreContainer">
+          <EntitySet Name="Goal" EntityType="Self.Goal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoalType" EntityType="Self.GoalType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measurement" EntityType="Self.Measurement" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Goal_GoalType1" Association="Self.FK_Goal_GoalType1">
+            <End Role="GoalType" EntitySet="GoalType" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Measurement" Association="Self.FK_Goal_Measurement">
+            <End Role="Measurement" EntitySet="Measurement" />
+            <End Role="Goal" EntitySet="Goal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitGoalsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="GoalID" />
+          </Key>
+          <Property Name="GoalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GoalTypeID" Type="Int32" Nullable="false" />
+          <Property Name="GoalQuantity" Type="Int32" Nullable="false" />
+          <Property Name="MeasurementID" Type="Int32" Nullable="false" />
+          <Property Name="GoalDeadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UserAssociation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GoalType" Relationship="Self.FK_Goal_GoalType1" FromRole="Goal" ToRole="GoalType" />
+          <NavigationProperty Name="Measurement" Relationship="Self.FK_Goal_Measurement" FromRole="Goal" ToRole="Measurement" />
+        </EntityType>
+        <EntityType Name="GoalType">
+          <Key>
+            <PropertyRef Name="GoalTypeID" />
+          </Key>
+          <Property Name="GoalTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Goals" Relationship="Self.FK_Goal_GoalType1" FromRole="GoalType" ToRole="Goal" />
+        </EntityType>
+        <EntityType Name="Measurement">
+          <Key>
+            <PropertyRef Name="MeasurementID" />
+          </Key>
+          <Property Name="MeasurementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeasurementName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Goals" Relationship="Self.FK_Goal_Measurement" FromRole="Measurement" ToRole="Goal" />
+        </EntityType>
+        <Association Name="FK_Goal_GoalType1">
+          <End Role="GoalType" Type="Self.GoalType" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoalType">
+              <PropertyRef Name="GoalTypeID" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="GoalTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Goal_Measurement">
+          <End Role="Measurement" Type="Self.Measurement" Multiplicity="1" />
+          <End Role="Goal" Type="Self.Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Measurement">
+              <PropertyRef Name="MeasurementID" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="MeasurementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitGoalsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Goals" EntityType="Self.Goal" />
+          <EntitySet Name="GoalTypes" EntityType="Self.GoalType" />
+          <EntitySet Name="Measurements" EntityType="Self.Measurement" />
+          <AssociationSet Name="FK_Goal_GoalType1" Association="Self.FK_Goal_GoalType1">
+            <End Role="GoalType" EntitySet="GoalTypes" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Goal_Measurement" Association="Self.FK_Goal_Measurement">
+            <End Role="Measurement" EntitySet="Measurements" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FitGoalsModelStoreContainer" CdmEntityContainer="FitGoalsEntities">
+          <EntitySetMapping Name="Goals">
+            <EntityTypeMapping TypeName="FitGoalsModel.Goal">
+              <MappingFragment StoreEntitySet="Goal">
+                <ScalarProperty Name="GoalID" ColumnName="GoalID" />
+                <ScalarProperty Name="GoalName" ColumnName="GoalName" />
+                <ScalarProperty Name="GoalTypeID" ColumnName="GoalTypeID" />
+                <ScalarProperty Name="GoalQuantity" ColumnName="GoalQuantity" />
+                <ScalarProperty Name="MeasurementID" ColumnName="MeasurementID" />
+                <ScalarProperty Name="GoalDeadline" ColumnName="GoalDeadline" />
+                <ScalarProperty Name="UserAssociation" ColumnName="UserAssociation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoalTypes">
+            <EntityTypeMapping TypeName="FitGoalsModel.GoalType">
+              <MappingFragment StoreEntitySet="GoalType">
+                <ScalarProperty Name="GoalTypeID" ColumnName="GoalTypeID" />
+                <ScalarProperty Name="GoalName" ColumnName="GoalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measurements">
+            <EntityTypeMapping TypeName="FitGoalsModel.Measurement">
+              <MappingFragment StoreEntitySet="Measurement">
+                <ScalarProperty Name="MeasurementID" ColumnName="MeasurementID" />
+                <ScalarProperty Name="MeasurementName" ColumnName="MeasurementName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

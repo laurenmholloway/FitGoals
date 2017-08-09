@@ -1,0 +1,26 @@
+﻿@model FitGoals.Models.GoalType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GoalType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GoalName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoalName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GoalTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
