@@ -4,20 +4,39 @@
     ViewBag.Title = "fitGoals | Dashboard";
 }
 
+<div>
+    <h1>Dashboard</h1>
+</div>
 
-@foreach (var item in Model) {
-   
-            @Html.DisplayFor(modelItem => item.GoalName)
+
+<div class="col-sm-12 col-md-4">
+    <div class="thumbnail">
+        <img src="~/Images/Donut-Chart.svg.png" alt="...">
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+        <div class="col-sm-12 col-md-4">
+            <div class="thumbnail">
+                <h4>Blank Days Left</h4>
+                <img src="~/Images/progressDemo.png" alt="...">
+                <div class="caption">
+                    <h4>@Html.DisplayFor(modelItem => item.GoalName)</h4>
+                    <p>@Html.DisplayFor(modelItem => item.GoalQuantity) @Html.DisplayFor(modelItem => item.Measurement.MeasurementName)</p>
+                    <p><a href="#" class="btn btn-primary" role="button">Track Activity</a></p>
+                </div>
+            </div>
+        </div>
+            
        
-            @Html.DisplayFor(modelItem => item.GoalQuantity)
+            
        
-            @Html.DisplayFor(modelItem => item.GoalDeadline)
+            @*@Html.DisplayFor(modelItem => item.GoalDeadline)
        
             @Html.DisplayFor(modelItem => item.UserAssociation)
        
-            @Html.DisplayFor(modelItem => item.GoalType.GoalName)
-       
-            @Html.DisplayFor(modelItem => item.Measurement.MeasurementName)
+            @Html.DisplayFor(modelItem => item.GoalType.GoalName)*@
       
             @*@Html.ActionLink("Edit", "Edit", new { id=item.GoalID }) |
             @Html.ActionLink("Details", "Details", new { id=item.GoalID }) |
@@ -25,4 +44,13 @@
         
 }
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
 
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+
+</div>
